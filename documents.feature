@@ -71,6 +71,35 @@ Feature: Document management
     When I search a document with id 'fake-id'
     Then the document is not found
 
+  Scenario: Search documents by query
+    Given Kuzzle Server is running
+    And there is an index 'test-index'
+    And it has a collection 'test-collection'
+    And I truncate the collection 'test-collection'
+    And the collection has a document with id 'search-my-document-id1'
+    And the collection has a document with id 'search-my-document-id2'
+    And the collection has a document with id 'search-my-document-id3'
+    And the collection has a document with id 'search-my-document-id4'
+    And the collection has a document with id 'search-my-document-id5'
+    When I search documents matching '{}' with from 0 and size 2
+    Then The search result should have a total of 5 documents
+    And The search result should have fetched 2 documents
+  
+  Scenario: Search next documents
+    Given Kuzzle Server is running
+    And there is an index 'test-index'
+    And it has a collection 'test-collection'
+    And I truncate the collection 'test-collection'
+    And the collection has a document with id 'search-my-document-id1'
+    And the collection has a document with id 'search-my-document-id2'
+    And the collection has a document with id 'search-my-document-id3'
+    And the collection has a document with id 'search-my-document-id4'
+    And the collection has a document with id 'search-my-document-id5'
+    When I search documents matching '{}' with from 0 and size 2
+    And I search the next documents
+    Then The search result should have a total of 5 documents
+    And The search result should have fetched 4 documents
+
   Scenario: Count documents in a collection
     Given Kuzzle Server is running
     And there is an index 'test-index'
