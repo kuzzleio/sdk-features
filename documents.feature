@@ -133,6 +133,7 @@ Feature: Document management
     Given Kuzzle Server is running
     And there is an index 'test-index'
     And it has a collection 'mcreate-test-collection'
+    And the collection has a document with id 'mcreate-my-document-id'
     And the collection doesn't have a document with id 'mcreate-my-document-id'
     And the collection doesn't have a document with id 'mcreate-my-document-id2'
     When I create the documents ['mcreate-my-document-id', 'mcreate-my-document-id2']
