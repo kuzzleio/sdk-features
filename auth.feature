@@ -20,7 +20,7 @@ Feature: User management
     And I log in as 'my-user-name':'my-user-pwd'
     And I update my user custom data with the pair <field-name>:<field-value>
     When I get my user info
-    Then the response '_source' field contains the pair <field-name>:<field-value>
+    Then the response 'content' field contains the pair <field-name>:<field-value>
     Examples:
       | field-name | field-value |
       | 'my_data' | 'mystringvalue' |
