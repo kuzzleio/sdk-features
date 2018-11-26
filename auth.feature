@@ -40,4 +40,4 @@ Feature: User management
     And the user has 'local' credentials with name 'my-user-name' and password 'my-user-pwd'
     And I log in as 'my-user-name':'my-user-pwd'
     And I get my rights
-    Then I have a vector of rights
+    Then I have a vector with 1 rights
