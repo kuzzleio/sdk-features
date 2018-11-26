@@ -33,3 +33,11 @@ Feature: User management
     And the JWT is valid
     When I logout
     Then the JWT is invalid
+
+  Scenario: GetMyRights should return vector of rights
+    Given Kuzzle Server is running
+    And there is an user with id 'my-user-id'
+    And the user has 'local' credentials with name 'my-user-name' and password 'my-user-pwd'
+    And I log in as 'my-user-name':'my-user-pwd'
+    And I get my rights
+    Then I have a vector of rights
