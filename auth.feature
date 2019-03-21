@@ -48,5 +48,5 @@ Feature: User management
     And I log in as 'my-user-name':'my-user-pwd'
     And the JWT is valid
     When I refresh the JWT
-    Then I get a different JWT
+    Then The previous JWT is now invalid
     And the JWT is valid
