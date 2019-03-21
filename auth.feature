@@ -44,6 +44,7 @@ Feature: User management
 
   Scenario: RefreshToken should return a valid token
     Given Kuzzle Server is running
+    And there is an user with id 'my-user-id'
     And the user has 'local' credentials with name 'my-user-name' and password 'my-user-pwd'
     And I log in as 'my-user-name':'my-user-pwd'
     And the JWT is valid
