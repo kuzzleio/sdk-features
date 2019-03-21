@@ -41,3 +41,13 @@ Feature: User management
     And I log in as 'my-user-name':'my-user-pwd'
     And I get my rights
     Then I have a vector with 1 rights
+
+  Scenario: RefreshToken should return a valid token
+    Given Kuzzle Server is running
+    And there is an user with id 'my-user-id'
+    And the user has 'local' credentials with name 'my-user-name' and password 'my-user-pwd'
+    And I log in as 'my-user-name':'my-user-pwd'
+    And the JWT is valid
+    When I refresh the JWT
+    Then the previous JWT is now invalid
+    And the JWT is valid
