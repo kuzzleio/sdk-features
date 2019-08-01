@@ -6,7 +6,7 @@ Feature: Document management
     And it has a collection 'test-collection'
     And the collection has a document with id 'my-document-id'
     When I create a document with id 'my-document-id'
-    Then I get an error with message 'Document already exists'
+    Then I get an error with message 'Document already exists.'
 
   Scenario: Create a document with create
     Given Kuzzle Server is running
