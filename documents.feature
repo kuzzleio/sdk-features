@@ -6,7 +6,7 @@ Feature: Document management
     And it has a collection 'test-collection'
     And the collection has a document with id 'my-document-id'
     When I create a document with id 'my-document-id'
-    Then I get an error with message 'Document already exists.'
+    Then I get an error with message 'Document with id "my-document-id" already exists.'
 
   Scenario: Create a document with create
     Given Kuzzle Server is running
@@ -84,7 +84,7 @@ Feature: Document management
     When I search documents matching '{}' with from 0 and size 2
     Then The search result should have a total of 5 documents
     And The search result should have fetched 2 documents
-  
+
   Scenario: Search next documents
     Given Kuzzle Server is running
     And there is an index 'test-index'
@@ -127,7 +127,7 @@ Feature: Document management
     And the collection has a document with id 'mdelete-my-document-id2'
     When I delete the documents ['mdelete-my-document-id', 'mdelete-my-document-unknown']
     Then I must have 1 documents in the collection
-    And I get a partial error
+    And I get an error in the errors array
 
   Scenario: Create multiple documents with no error
     Given Kuzzle Server is running
@@ -137,7 +137,7 @@ Feature: Document management
     And the collection doesn't have a document with id 'mcreate-my-document-id2'
     When I create the documents ['mcreate-my-document-id', 'mcreate-my-document-id2']
     Then I must have 2 documents in the collection
-    And I should have no partial error
+    And I should have no errors in the errors array
 
   Scenario: Create multiple documents with partial error
     Given Kuzzle Server is running
@@ -146,7 +146,7 @@ Feature: Document management
     And the collection has a document with id 'mcreate-my-document-id'
     When I create the documents ['mcreate-my-document-id', 'mcreate-my-document-id2']
     Then I must have 2 documents in the collection
-    And I get a partial error
+    And I get an error in the errors array
 
   Scenario: Replace multiple documents with no error
     Given Kuzzle Server is running
@@ -155,7 +155,7 @@ Feature: Document management
     And the collection has a document with id 'mreplace-my-document-id'
     And the collection has a document with id 'mreplace-my-document-id2'
     When I replace the documents ['mreplace-my-document-id', 'mreplace-my-document-id2']
-    Then I should have no partial error
+    Then I should have no errors in the errors array
     And the document 'mreplace-my-document-id' should be replaced
     And the document 'mreplace-my-document-id2' should be replaced
 
@@ -167,7 +167,7 @@ Feature: Document management
     And the collection has a document with id 'mreplace-my-document-id2'
     When I replace the documents ['unknown', 'mreplace-my-document-id2']
     And the document 'mreplace-my-document-id2' should be replaced
-    And I get a partial error
+    And I get an error in the errors array
 
   Scenario: Update multiple documents with no error
     Given Kuzzle Server is running
@@ -176,7 +176,7 @@ Feature: Document management
     And the collection has a document with id 'mreplace-my-document-id'
     And the collection has a document with id 'mreplace-my-document-id2'
     When I update the documents ['mreplace-my-document-id', 'mreplace-my-document-id2']
-    Then I should have no partial error
+    Then I should have no errors in the errors array
     And the document 'mreplace-my-document-id' should be replaced
     And the document 'mreplace-my-document-id2' should be replaced
 
@@ -188,14 +188,14 @@ Feature: Document management
     And the collection has a document with id 'mupdate-my-document-id2'
     When I update the documents ['unknown', 'mupdate-my-document-id2']
     Then the document 'mupdate-my-document-id2' should be updated
-    And I get a partial error
+    And I get an error in the errors array
 
   Scenario: CreateOrReplace (create) multiple documents with no error
     Given Kuzzle Server is running
     And there is an index 'test-index'
     And it has a collection 'mcreateorreplace-test-collection'
     When I createOrReplace the documents ['mcreateorreplace-my-document-id', 'mcreateorreplace-my-document-id2']
-    Then I should have no partial error
+    Then I should have no errors in the errors array
     And the document 'mcreateorreplace-my-document-id' should be created
     And the document 'mcreateorreplace-my-document-id2' should be created
 
@@ -206,7 +206,7 @@ Feature: Document management
     And the collection has a document with id 'mcreateorreplace-my-document-id'
     And the collection has a document with id 'mcreateorreplace-my-document-id2'
     When I createOrReplace the documents ['mcreateorreplace-my-document-id', 'mcreateorreplace-my-document-id2']
-    Then I should have no partial error
+    Then I should have no errors in the errors array
     And the document 'mcreateorreplace-my-document-id' should be replaced
     And the document 'mcreateorreplace-my-document-id2' should be replaced
 

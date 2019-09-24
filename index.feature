@@ -1,14 +1,9 @@
 Feature: Index controller
 
-  Scenario: Create should create an index
-    Given Kuzzle Server is running
-    And there is no index called 'test-index'
-    When I create an index called 'test-index'
-    Then the index should exist
-
   Scenario: Create should return an error when the index already exist
     Given Kuzzle Server is running
     And there is an index 'test-index'
+    And it has a collection 'test-collection'
     When I create an index called 'test-index'
     Then I get an error
 
